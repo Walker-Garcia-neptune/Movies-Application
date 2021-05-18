@@ -10,4 +10,11 @@ const getBooks = () => {
             $('#container').html(htmlStr);
         });
 };
-getBooks();
+
+
+    $(window).load(function() {
+    $('#loading').hide();
+});
+
+setTimeout(getBooks,5000)
+
