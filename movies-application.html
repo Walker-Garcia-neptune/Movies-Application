@@ -6,13 +6,18 @@
     <link rel="stylesheet" href="movies-application.css">
 </head>
 <body>
-<div id="container"></div>
-
+    <div id="movieContainer"></div>
     <div id="loading">
         <h1>Loading Please Wait...</h1>
         <div id="loader"></div>
     </div>
-<button id="addMovie">Enter Your Choice</button>
+    <form>
+        <label for="addTitleInput">Movie title</label>
+        <input type="text" id="addTitleInput">
+        <label for="addRatingInput">Movie rating 1-5</label>
+        <input type="text" id="addRatingInput">
+        <button type="button" id="addMovie">Add movie</button>
+    </form>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="movies-application.js"></script>

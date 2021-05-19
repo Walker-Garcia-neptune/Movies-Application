@@ -7,28 +7,43 @@ const getMovies = () => {
             for(let movie of movies) {
                 htmlStr += `<h1>${movie.title}</h1><p>by: ${movie.director}</p>`
             }
-            $('#container').html(htmlStr);
+            $('#movieContainer').html(htmlStr);
         }).then(fade_out);
 };
 function fade_out() {
     $("#loading").fadeOut().empty();
-    // $('body').css().empty();
 }
 
 
-getMovies()
+let newMovieTitle = '';
+let newMovieRating = '';
+
+let newMovie = {
+    "title": '',
+    "rating": ''
+};
+
 let postOption = {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
     },
-    body: JSON.stringify(newMovie)
+    body: ''
 }
-$("#addMovie").click(() => {
+
+$("#addMovie").click((e) => {
+    e.preventDefault();
+    newMovieTitle = $('#addTitleInput').val();
+    newMovieRating = $('#addRatingInput').val();
+    console.log(newMovieTitle);
+    newMovie.title = `${newMovieTitle}`;
+    newMovie.rating = `${newMovieRating}`;
+    postOption.body = JSON.stringify(newMovie);
     fetch(`https://auspicious-grizzled-unicorn.glitch.me/movies`, postOption)
         .then(getMovies);
 });
 
+getMovies();
 
 
 
