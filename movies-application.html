@@ -11,9 +11,11 @@
         <h1>Loading Please Wait...</h1>
         <div id="loader"></div>
     </div>
-    <label for="movieEditor">Edit The Movie</label>
-    <select name="Edit Movies" id="movieEditor"></select>
-    <form>
+    <label for="movieEditSelector">Edit The Movie</label>
+    <select name="Edit Movies" id="movieEditSelector">
+        <option value="default" selected>Select a movie</option>
+    </select>
+    <form id="movieEditorInputs" class="hideThis">
         <label for="editTitle">Title</label>
         <input type="text" id="editTitle">
         <label for="editRating">Rating</label>

@@ -11,7 +11,7 @@ const getMovies = () => {
 
             }
             $('#movieContainer').html(htmlStr);
-            $('#movieEditor').html(htmlStr1)
+            $('#movieEditSelector').append(htmlStr1)
         }).then(fade_out);
 };
 function fade_out() {
@@ -54,7 +54,15 @@ $("#addMovie").click((e) => {
         .then(getMovies);
 });
 
-$('')
+$('#movieEditSelector').change(() => {
+    $('#movieEditorInputs').removeClass('hideThis');
+    let selectedVal = $('#movieEditSelector').val();
+    console.log(selectedVal);
+    if (selectedVal === 'default') {
+        $('#movieEditorInputs').addClass('hideThis');
+    }
+
+});
 
 getMovies();
 
