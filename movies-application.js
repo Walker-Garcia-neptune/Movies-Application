@@ -1,4 +1,3 @@
-
 const getMovies = () => {
     fetch('https://auspicious-grizzled-unicorn.glitch.me/movies')
         .then(resp => resp.json())
@@ -6,15 +5,20 @@ const getMovies = () => {
             console.log(movies);
             let htmlStr = '';
             let htmlStr1 = '';
-            for(let movie of movies) {
-                htmlStr += `<h1>${movie.title}</h1><p>by: ${movie.director}</p><img src="${movie.poster}" alt="Movie Poster for ${movie.title}" style="width: 100px">`
+            for (let movie of movies) {
+                htmlStr += `<h1>${movie.title}</h1>
+                            <p>by: ${movie.director}</p>
+                            <img src="${movie.poster}" alt="Movie Poster for ${movie.title}" style="width: 100px">
+                            <button type="button" class="deleteMovie">Delete Movie</button>`
+
                 htmlStr1 += `<option value="${movie.id}">${movie.title}</option>`
 
             }
             $('#movieContainer').html(htmlStr);
-            $('#movieEditSelector').append(htmlStr1)
+            $('#movieEditSelector').html(htmlStr1)
+            $('#movieEditSelector').prepend(`<option value="default" selected>Select a movie</option>`)
 
-            // Selects movie to edit and populates form values with the movie data
+            // Selects movie to edit and populates form input values with the movie data
             $('#movieEditSelector').change(() => {
                 $('#movieEditorInputs').removeClass('hideThis');
                 let selectedVal = $('#movieEditSelector').val();
@@ -23,6 +27,7 @@ const getMovies = () => {
                     $('#movieEditorInputs').addClass('hideThis');
                 }
 
+                let movieSelected = movies;
                 for (let movie of movies) {
                     if (movie.id == selectedVal) {
                         $('#editTitle').val(movie.title);
@@ -36,14 +41,50 @@ const getMovies = () => {
                     }
                 }
 
+                $('#editMovieButton').click(function () {
+                    let patchThis = {
+                        "title": $('#editTitle').val(),
+                        "rating": $('#editRating').val(),
+                        "poster": $('#editPoster').val(),
+                        "year": $('#editYear').val(),
+                        "genre": $('#editGenre').val(),
+                        "director": $('#editDirector').val(),
+                        "plot": $('#editPlot').val(),
+                        "actors": $('#editActors').val()
+                    }
+                    let patchOption = {
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(patchThis)
+                    }
+                    fetch(`https://auspicious-grizzled-unicorn.glitch.me/movies/${selectedVal}`, patchOption).then(getMovies);
+                    console.log(selectedVal)
+
+                })
             });
+
 
         }).then(fade_out);
 };
+
+let deleteOptions = {
+    method: 'DELETE',
+    headers: {
+        'Content-Type': 'application/json',
+    }
+};
+
+$(".deleteMovie").click(() => {
+    let inputVal = $(".deleteMovie").val();
+    fetch(`https://jungle-enshrined-couch.glitch.me/movies/${inputVal}`, deleteOptions)
+        .then(getMovies);
+})
+
 function fade_out() {
     $("#loading").fadeOut().empty();
 }
-
 
 
 let newMovieTitle = '';
@@ -59,7 +100,7 @@ let newMovie = {
     "plot": "",
     "actors": ""
 };
-
+// working with POST
 let postOption = {
     method: 'POST',
     headers: {
@@ -79,6 +120,24 @@ $("#addMovie").click((e) => {
     fetch(`https://auspicious-grizzled-unicorn.glitch.me/movies`, postOption)
         .then(getMovies);
 });
+
+// working on PATCH
+// let patchThis = {
+//     "title":,
+//     "author": {
+//         "firstName": "TRick",
+//         "lastName": "TRiordan"
+//     }
+// }
+// let patchOption = {
+//     method: 'PATCH',
+//     headers: {
+//         'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify(patchThis)
+// }
+// fetch(`https://auspicious-grizzled-unicorn.glitch.me/books/7`, patchOption).then(getBooks);
+
 
 // $('#movieEditSelector').change(() => {
 //     $('#movieEditorInputs').removeClass('hideThis');

@@ -12,9 +12,7 @@
         <div id="loader"></div>
     </div>
     <label for="movieEditSelector">Edit The Movie</label>
-    <select name="Edit Movies" id="movieEditSelector">
-        <option value="default" selected>Select a movie</option>
-    </select>
+    <select name="Edit Movies" id="movieEditSelector"></select>
     <form id="movieEditorInputs" class="hideThis">
         <label for="editTitle">Title</label>
         <input type="text" id="editTitle">
@@ -40,7 +38,7 @@
         <label for="editActors">Actors</label>
         <input type="text" id="editActors">
         <br>
-        <button type="button">Edit movie</button>
+        <button id="editMovieButton" type="button">Edit movie</button>
     </form>
     <form>
         <label for="addTitleInput">Movie title</label>
