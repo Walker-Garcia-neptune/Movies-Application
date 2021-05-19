@@ -18,7 +18,8 @@ const getMovies = () => {
             $('#movieEditSelector').html(htmlStr1)
             $('#movieEditSelector').prepend(`<option value="default" selected>Select a movie</option>`)
 
-            // Selects movie to edit and populates form input values with the movie data
+        }).then(fade_out)
+        .then(function () {
             $('#movieEditSelector').change(() => {
                 $('#movieEditorInputs').removeClass('hideThis');
                 let selectedVal = $('#movieEditSelector').val();
@@ -63,23 +64,23 @@ const getMovies = () => {
                     console.log(selectedVal)
 
                 })
-                let deleteOptions = {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                };
 
-                $(".deleteMovie").click(() => {
-                    alert("it worked bitch");
-                    // let inputVal = $(".deleteMovie").val();
-                    // fetch(`https://jungle-enshrined-couch.glitch.me/movies/${inputVal}`, deleteOptions)
-                    //     .then(getMovies);
-                })
-            });
+            })
+        }).then(function () {
+        let deleteOptions = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        };
 
-
-        }).then(fade_out);
+        $(".deleteMovie").click(() => {
+            // alert("it worked bitch");
+            let inputVal = $(".deleteMovie").value;
+            fetch(`https://jungle-enshrined-couch.glitch.me/movies/${inputVal}`, deleteOptions)
+                .then(getMovies);
+        })
+    })
 };
 
 
