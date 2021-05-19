@@ -27,7 +27,7 @@ const getMovies = () => {
                     $('#movieEditorInputs').addClass('hideThis');
                 }
 
-                let movieSelected = movies;
+
                 for (let movie of movies) {
                     if (movie.id == selectedVal) {
                         $('#editTitle').val(movie.title);
@@ -63,24 +63,25 @@ const getMovies = () => {
                     console.log(selectedVal)
 
                 })
-                let deleteOptions = {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                };
-
-                $(".deleteMovie").click(() => {
-                    alert("it worked bitch");
-                    // let inputVal = $(".deleteMovie").val();
-                    // fetch(`https://jungle-enshrined-couch.glitch.me/movies/${inputVal}`, deleteOptions)
-                    //     .then(getMovies);
-                })
             });
 
 
         }).then(fade_out);
 };
+
+// let deleteOptions = {
+//     method: 'DELETE',
+//     headers: {
+//         'Content-Type': 'application/json',
+//     }
+// };
+//
+// $(".deleteMovie").click(() => {
+//     alert("it worked bitch");
+//     // let inputVal = $(".deleteMovie").val();
+//     // fetch(`https://jungle-enshrined-couch.glitch.me/movies/${inputVal}`, deleteOptions)
+//     //     .then(getMovies);
+// })
 
 
 function fade_out() {
