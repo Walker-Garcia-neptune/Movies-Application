@@ -13,16 +13,29 @@
                     htmlStr += `<h1>${movie.title}</h1>
                                 <p>by: ${movie.director}</p>
                                 <img src="${movie.poster}" alt="Movie Poster for ${movie.title}" style="width: 100px">
-                                <button type="button" class="deleteMovie">Delete Movie</button>`;
+                                <button type="button" id="deleteMovie${movie.id}" data-id="${movie.id}" onclick="deleteMovie(${movie.id})">Delete Movie</button>`;
                     htmlStr1 += `<option value="${movie.id}">${movie.title}</option>`;
                 }
                 $('#movieContainer').html(htmlStr);
                 $('#movieEditSelector').html(htmlStr1);
                 $('#movieEditSelector').prepend(`<option value="default" selected>Select a movie</option>`);
-            }).then(fade_out);
+            }).then(fade_out)
     };
 
     getMovies();
+
+
+function deleteMovie(id) {
+    console.log("it worked");
+    console.log(`this movie id is ${id}`);
+    let deleteOptions = {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    };
+    fetch(`https://auspicious-grizzled-unicorn.glitch.me/movies/${id}`, deleteOptions).then(getMovies);
+}
 
     // Selects movie to edit and populates form input values with the movie data
     $('#movieEditSelector').change(() => {
@@ -70,22 +83,7 @@
         fetch(`https://auspicious-grizzled-unicorn.glitch.me/movies/${selectedVal}`, patchOption).then(getMovies);
         console.log(selectedVal);
 
-
     });
-
-    // let deleteOptions = {
-    //     method: 'DELETE',
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //     }
-    // };
-    //
-    // $(".deleteMovie").click(() => {
-    //     alert("it worked bitch");
-    //     // let inputVal = $(".deleteMovie").val();
-    //     // fetch(`https://jungle-enshrined-couch.glitch.me/movies/${inputVal}`, deleteOptions)
-    //     //     .then(getMovies);
-    // })
 
     function fade_out() {
         $("#loading").fadeOut().empty();
@@ -101,6 +99,7 @@
         "plot": "",
         "actors": ""
     };
+
     // working with POST
     let postOption = {
         method: 'POST',
