@@ -13,7 +13,7 @@
                     htmlStr += `<h1>${movie.title}</h1>
                                 <p>by: ${movie.director}</p>
                                 <img src="${movie.poster}" alt="Movie Poster for ${movie.title}" style="width: 100px">
-                                <button type="button" id="deleteMovie${movie.id}" data-id="${movie.id}" onclick="deleteMovie(${movie.id})">Delete Movie</button>`;
+                                <button type="button" id="deleteMovie${movie.id}" onclick="deleteMovie(${movie.id})">Delete Movie</button>`;
                     htmlStr1 += `<option value="${movie.id}">${movie.title}</option>`;
                 }
                 $('#movieContainer').html(htmlStr);
@@ -25,14 +25,14 @@
     getMovies();
 
 
-function deleteMovie(id) {
-    console.log("it worked");
-    console.log(`this movie id is ${id}`);
-    let deleteOptions = {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-        }
+    function deleteMovie(id) {
+        console.log("it worked");
+        console.log(`this movie id is ${id}`);
+        let deleteOptions = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            }
     };
     fetch(`https://auspicious-grizzled-unicorn.glitch.me/movies/${id}`, deleteOptions).then(getMovies);
 }
