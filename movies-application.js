@@ -33,9 +33,9 @@
             headers: {
                 'Content-Type': 'application/json',
             }
-    };
-    fetch(`https://auspicious-grizzled-unicorn.glitch.me/movies/${id}`, deleteOptions).then(getMovies);
-}
+        };
+        fetch(`https://auspicious-grizzled-unicorn.glitch.me/movies/${id}`, deleteOptions).then(getMovies);
+    }
 
     // Selects movie to edit and populates form input values with the movie data
     $('#movieEditSelector').change(() => {
