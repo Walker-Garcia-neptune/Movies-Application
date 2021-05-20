@@ -13,12 +13,12 @@
                     htmlStr += `<h1>${movie.title}</h1>
                                 <p>by: ${movie.director}</p>
                                 <img src="${movie.poster}" alt="Movie Poster for ${movie.title}" style="width: 100px">
-                                <button type="button" class="deleteMovie">Delete Movie</button>`
-                    htmlStr1 += `<option value="${movie.id}">${movie.title}</option>`
+                                <button type="button" class="deleteMovie">Delete Movie</button>`;
+                    htmlStr1 += `<option value="${movie.id}">${movie.title}</option>`;
                 }
                 $('#movieContainer').html(htmlStr);
-                $('#movieEditSelector').html(htmlStr1)
-                $('#movieEditSelector').prepend(`<option value="default" selected>Select a movie</option>`)
+                $('#movieEditSelector').html(htmlStr1);
+                $('#movieEditSelector').prepend(`<option value="default" selected>Select a movie</option>`);
             }).then(fade_out);
     };
 
@@ -59,19 +59,20 @@
             "director": $('#editDirector').val(),
             "plot": $('#editPlot').val(),
             "actors": $('#editActors').val()
-        }
+        };
         let patchOption = {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(patchThis)
-        }
+        };
         fetch(`https://auspicious-grizzled-unicorn.glitch.me/movies/${selectedVal}`, patchOption).then(getMovies);
         console.log(selectedVal);
 
 
-    })
+    });
+
     // let deleteOptions = {
     //     method: 'DELETE',
     //     headers: {
@@ -86,14 +87,9 @@
     //     //     .then(getMovies);
     // })
 
-
     function fade_out() {
         $("#loading").fadeOut().empty();
     }
-
-
-    let newMovieTitle = '';
-    let newMovieRating = '';
 
     let newMovie = {
         "title": "",
@@ -112,12 +108,12 @@
             'Content-Type': 'application/json',
         },
         body: ''
-    }
+    };
 
     $("#addMovie").click((e) => {
         e.preventDefault();
-        newMovieTitle = $('#addTitleInput').val();
-        newMovieRating = $('#addRatingInput').val();
+        let newMovieTitle = $('#addTitleInput').val();
+        let newMovieRating = $('#addRatingInput').val();
         console.log(newMovieTitle);
         newMovie.title = `${newMovieTitle}`;
         newMovie.rating = `${newMovieRating}`;
@@ -125,31 +121,3 @@
         fetch(`https://auspicious-grizzled-unicorn.glitch.me/movies`, postOption)
             .then(getMovies);
     });
-
-    // working on PATCH
-    // let patchThis = {
-    //     "title":,
-    //     "author": {
-    //         "firstName": "TRick",
-    //         "lastName": "TRiordan"
-    //     }
-    // }
-    // let patchOption = {
-    //     method: 'PATCH',
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify(patchThis)
-    // }
-    // fetch(`https://auspicious-grizzled-unicorn.glitch.me/books/7`, patchOption).then(getBooks);
-
-
-    // $('#movieEditSelector').change(() => {
-    //     $('#movieEditorInputs').removeClass('hideThis');
-    //     let selectedVal = $('#movieEditSelector').val();
-    //     console.log(selectedVal);
-    //     if (selectedVal === 'default') {
-    //         $('#movieEditorInputs').addClass('hideThis');
-    //     }
-    //
-    // });
