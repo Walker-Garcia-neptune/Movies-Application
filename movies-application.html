@@ -3,16 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="movies-application.css">
+
 </head>
-<body>
-    <div id="movieContainer"></div>
-    <div id="loading">
-        <h1>Loading Please Wait...</h1>
-        <div id="loader"></div>
-    </div>
-    <label for="movieEditSelector">Edit The Movie</label>
-    <select name="Edit Movies" id="movieEditSelector"></select>
+<body class="container">
+<div id="movieContainer" class="d-flex flex-wrap align-items-start"></div>
+<div id="loading">
+    <h1>Loading Please Wait...</h1>
+    <div id="loader"></div>
+</div>
+
+<div class="rightSide">
+    <button id="showEdit" class="btn btn-secondary">Edit Movies</button>
+    <select name="Edit Movies" class="hideThis" id="movieEditSelector"></select>
     <form id="movieEditorInputs" class="hideThis">
         <label for="editTitle">Title</label>
         <input type="text" id="editTitle">
@@ -38,17 +43,28 @@
         <label for="editActors">Actors</label>
         <input type="text" id="editActors">
         <br>
-        <button id="editMovieButton" type="button">Edit movie</button>
+        <button id="editMovieButton" class="btn btn-secondary" type="button">Edit movie</button>
     </form>
-    <form>
-        <label for="addTitleInput">Movie title</label>
-        <input type="text" id="addTitleInput">
-        <label for="addRatingInput">Movie rating 1-5</label>
-        <input type="text" id="addRatingInput">
-        <button type="button" id="addMovie">Add movie</button>
-    </form>
+</div>
+<br>
+<div class="rightSide">
+    <button id="showCreate" class="btn btn-secondary">Create A Movie</button>
+<form id="movieCreationInput" class="hideThis">
+    <label for="addTitleInput">Movie title</label>
+    <input type="text" id="addTitleInput">
+    <label for="addRatingInput">Movie rating 1-5</label>
+    <input type="text" id="addRatingInput">
+    <button type="button" class="btn btn-secondary" id="addMovie">Add movie</button>
+</form>
+</div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 <script src="movies-application.js"></script>
 </body>
 </html>
