@@ -14,7 +14,7 @@
     height: 100%;
     text-align: center;
     flex-direction: column;
-    background-color: white;
+    background-color: gray;
     color: black;
 }
 #loader {
@@ -29,7 +29,35 @@
     animation: spin 2s linear infinite;
 }
 
+body {
+    background-color: gray;
+}
 img {
     width: 300px;
     height: 400px;
+}
+
+@keyframes change {
+    0% {
+        background-position: 0 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0 50%;
+    }
+}
+.card {
+    padding: .5em .5em 0 .5em;
+    margin: 1em;
+    background: linear-gradient(135deg, #b00b8e, #742b9d, #00379e);
+    background-size: 400%;
+    animation: change 10s ease-in-out alternate infinite;
+    color: white;
+}
+
+.card-body {
+    padding: 0 .5em 0 .5em;
 }

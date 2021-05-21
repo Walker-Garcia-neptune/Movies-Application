@@ -16,46 +16,48 @@
 </div>
 
 <div class="rightSide">
-    <button id="showEdit" class="btn btn-secondary">Edit Movies</button>
+<button id="showEdit" class="btn btn-secondary" >Edit Movies
+        </button>
+<form id="movieEditorInputs" class="hideThis">
     <select name="Edit Movies" class="hideThis" id="movieEditSelector"></select>
-    <form id="movieEditorInputs" class="hideThis">
-        <label for="editTitle">Title</label>
-        <input type="text" id="editTitle">
-        <br>
-        <label for="editRating">Rating</label>
-        <input type="text" id="editRating">
-        <br>
-        <label for="editPoster">Poster</label>
-        <input type="text" id="editPoster">
-        <br>
-        <label for="editYear">Year</label>
-        <input type="text" id="editYear">
-        <br>
-        <label for="editGenre">Genre</label>
-        <input type="text" id="editGenre">
-        <br>
-        <label for="editDirector">Director</label>
-        <input type="text" id="editDirector">
-        <br>
-        <label for="editPlot">Plot</label>
-        <input type="text" id="editPlot">
-        <br>
-        <label for="editActors">Actors</label>
-        <input type="text" id="editActors">
-        <br>
-        <button id="editMovieButton" class="btn btn-secondary" type="button">Edit movie</button>
-    </form>
+    <label for="editTitle">Title</label>
+    <input type="text" id="editTitle">
+    <br>
+    <label for="editRating">Rating</label>
+    <input type="text" id="editRating">
+    <br>
+    <label for="editPoster">Poster</label>
+    <input type="text" id="editPoster">
+    <br>
+    <label for="editYear">Year</label>
+    <input type="text" id="editYear">
+    <br>
+    <label for="editGenre">Genre</label>
+    <input type="text" id="editGenre">
+    <br>
+    <label for="editDirector">Director</label>
+    <input type="text" id="editDirector">
+    <br>
+    <label for="editPlot">Plot</label>
+    <input type="text" id="editPlot">
+    <br>
+    <label for="editActors">Actors</label>
+    <input type="text" id="editActors">
+    <br>
+    <button id="editMovieButton" class="btn btn-outline-light" type="button">Save Edit</button>
+</form>
 </div>
+
 <br>
 <div class="rightSide">
     <button id="showCreate" class="btn btn-secondary">Create A Movie</button>
-<form id="movieCreationInput" class="hideThis">
-    <label for="addTitleInput">Movie title</label>
-    <input type="text" id="addTitleInput">
-    <label for="addRatingInput">Movie rating 1-5</label>
-    <input type="text" id="addRatingInput">
-    <button type="button" class="btn btn-secondary" id="addMovie">Add movie</button>
-</form>
+    <form id="movieCreationInput" class="hideThis">
+        <label for="addTitleInput">Movie title</label>
+        <input type="text" id="addTitleInput">
+        <label for="addRatingInput">Movie rating 1-5</label>
+        <input type="text" id="addRatingInput">
+        <button type="button" class="btn btn-outline-light" id="addMovie">Add movie</button>
+    </form>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>

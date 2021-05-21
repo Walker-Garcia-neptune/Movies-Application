@@ -13,10 +13,13 @@ const getMovies = () => {
                 htmlStr += `<div id="movies${movie.id}" class="card" style="width: 15em;">
                                 <img class="card-img-top" src="${movie.poster}" alt="Movie Poster for ${movie.title}">
                                 <div class="card-body">
+                                <h4 class="card-title hideThis showOnHover">Click Me For More Info</h4>
                                 <h2 class="card-title hideThis hidden">${movie.title}</h2>
-                                <p class="card-text hidden hideThis movieDirector">By: ${movie.director}</p>
+                                <p class="card-text hidden hideThis text-muted movieDirector">By: ${movie.director}</p>
+                                <p></p>
+                                <p></p>
                                 <p class="card-text hidden hideThis moviePlot">Plot: ${movie.plot}</p>
-                                <button type="button" class="btn btn-secondary hidden hideThis" id="deleteMovie${movie.id}" onclick="deleteMovie(${movie.id})">Delete Movie</button>
+                                <button type="button" class="btn btn-outline-light hidden hideThis" id="deleteMovie${movie.id}" onclick="deleteMovie(${movie.id})">Delete Movie</button>
                                 </div>
                                 </div>`;
                 htmlStr1 += `<option value="${movie.id}">${movie.title}</option>`;
@@ -33,10 +36,16 @@ const getMovies = () => {
                 })
             }
         })
+        // .then(() => {
+        //     $(`movies${movie.id}`).hover(function (){
+        //         $(this).children('div').first().children('.showOnHover').toggleClass('hideThis')
+        //     })
+        // })
 
 };
 
 getMovies();
+
 
 $("#showEdit").click(function() {
     $("#movieEditorInputs").toggleClass("hideThis");
