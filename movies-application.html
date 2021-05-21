@@ -15,50 +15,92 @@
     <div id="loader"></div>
 </div>
 
-<div class="rightSide">
-<button id="showEdit" class="btn btn-secondary" >Edit Movies
-        </button>
-<form id="movieEditorInputs" class="hideThis">
-    <select name="Edit Movies" class="hideThis" id="movieEditSelector"></select>
-    <label for="editTitle">Title</label>
-    <input type="text" id="editTitle">
-    <br>
-    <label for="editRating">Rating</label>
-    <input type="text" id="editRating">
-    <br>
-    <label for="editPoster">Poster</label>
-    <input type="text" id="editPoster">
-    <br>
-    <label for="editYear">Year</label>
-    <input type="text" id="editYear">
-    <br>
-    <label for="editGenre">Genre</label>
-    <input type="text" id="editGenre">
-    <br>
-    <label for="editDirector">Director</label>
-    <input type="text" id="editDirector">
-    <br>
-    <label for="editPlot">Plot</label>
-    <input type="text" id="editPlot">
-    <br>
-    <label for="editActors">Actors</label>
-    <input type="text" id="editActors">
-    <br>
-    <button id="editMovieButton" class="btn btn-outline-light" type="button">Save Edit</button>
-</form>
+<!-- Button trigger modal -->
+<button type="button" id="showEdit" class="btn btn-secondary" data-toggle="modal" data-target="#modalEdit">
+    Edit Movies
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">Edit Movies</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="movieEditorInputs">
+                <select name="Edit Movies" id="movieEditSelector"></select>
+                <label for="editTitle">Title</label>
+                <input type="text" id="editTitle">
+                <br>
+                <label for="editRating">Rating</label>
+                <input type="text" id="editRating">
+                <br>
+                <label for="editPoster">Poster</label>
+                <input type="text" id="editPoster">
+                <br>
+                <label for="editYear">Year</label>
+                <input type="text" id="editYear">
+                <br>
+                <label for="editGenre">Genre</label>
+                <input type="text" id="editGenre">
+                <br>
+                <label for="editDirector">Director</label>
+                <input type="text" id="editDirector">
+                <br>
+                <label for="editPlot">Plot</label>
+                <input type="text" id="editPlot">
+                <br>
+                <label for="editActors">Actors</label>
+                <input type="text" id="editActors">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="editMovieButton" class="btn btn-secondary" type="button">Save Edit</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <br>
-<div class="rightSide">
-    <button id="showCreate" class="btn btn-secondary">Create A Movie</button>
-    <form id="movieCreationInput" class="hideThis">
-        <label for="addTitleInput">Movie title</label>
-        <input type="text" id="addTitleInput">
-        <label for="addRatingInput">Movie rating 1-5</label>
-        <input type="text" id="addRatingInput">
-        <button type="button" class="btn btn-outline-light" id="addMovie">Add movie</button>
-    </form>
+
+<!-- Button trigger modal -->
+<button id="showCreate" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalCreate">
+    Create Movies
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="modalCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="movieCreationInput">
+                    <label for="addTitleInput">Movie title</label>
+                    <input type="text" id="addTitleInput">
+                    <br>
+                    <label for="addRatingInput">Movie rating 1-5</label>
+                    <input type="text" id="addRatingInput">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-outline-light" id="addMovie">Add movie</button>
+            </div>
+        </div>
+    </div>
 </div>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"

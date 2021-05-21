@@ -47,14 +47,14 @@ const getMovies = () => {
 getMovies();
 
 
-$("#showEdit").click(function() {
-    $("#movieEditorInputs").toggleClass("hideThis");
-    $("#movieEditSelector").toggleClass("hideThis");
-});
+// $("#showEdit").click(function() {
+//     $("#movieEditorInputs").toggleClass("hideThis");
+//     $("#movieEditSelector").toggleClass("hideThis");
+// });
 
-$("#showCreate").click(function() {
-    $("#movieCreationInput").toggleClass("hideThis");
-});
+// $("#showCreate").click(function() {
+//     $("#movieCreationInput").toggleClass("hideThis");
+// });
 
 function deleteMovie(id) {
     console.log("it worked");

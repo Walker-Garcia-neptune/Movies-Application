@@ -16,6 +16,7 @@
     flex-direction: column;
     background-color: gray;
     color: black;
+    justify-content: center;
 }
 #loader {
     align-self: center;
