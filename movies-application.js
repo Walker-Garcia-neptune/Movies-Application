@@ -10,20 +10,8 @@ const getMovies = () => {
             let htmlStr = '';
             let htmlStr1 = '';
             for (let movie of moviesArr) {
-                htmlStr += `<div id="movies${movie.id}" class="card" style="width: 15em;">
-                                <img class="card-img-top" src="${movie.poster}" alt="Movie Poster for ${movie.title}">
-                                <div class="card-body">
-                                <h4 class="card-title hideThis showOnHover">Click Me For More Info</h4>
-                                <h2 class="card-title hideThis hidden">${movie.title}</h2>
-                                <p class="card-text hidden hideThis text-muted movieDirector">By: ${movie.director}</p>
-                                <p></p>
-                                <p></p>
-                                <p class="card-text hidden hideThis moviePlot">Plot: ${movie.plot}</p>
-                                <button type="button" class="btn btn-outline-light hidden hideThis" id="deleteMovie${movie.id}" onclick="deleteMovie(${movie.id})">Delete Movie</button>
-                                </div>
-                                </div>`;
-                htmlStr1 += `<option value="${movie.id}">${movie.title}</option>`;
-
+                htmlStr += movieHtml(movie);
+                htmlStr1 += selectHtml(movie);
             }
             $('#movieContainer').html(htmlStr);
             $('#movieEditSelector').html(htmlStr1);
@@ -36,20 +24,12 @@ const getMovies = () => {
                 })
             }
         })
-        // .then(() => {
-        //     $(`movies${movie.id}`).hover(function (){
-        //         $(this).children('div').first().children('.showOnHover').toggleClass('hideThis')
-        //     })
-        // })
-
 };
 
 getMovies();
 
 
 function deleteMovie(id) {
-    console.log("it worked");
-    console.log(`this movie id is ${id}`);
     let deleteOptions = {
         method: 'DELETE',
         headers: {
@@ -59,19 +39,23 @@ function deleteMovie(id) {
     fetch(`https://auspicious-grizzled-unicorn.glitch.me/movies/${id}`, deleteOptions).then(getMovies);
 }
 
+// Clears the edit input form
+function clearEditInput() {
+    $('#editTitle').val("");
+    $('#editRating').val("");
+    $('#editPoster').val("");
+    $('#editYear').val("");
+    $('#editGenre').val("");
+    $('#editDirector').val("");
+    $('#editPlot').val("");
+    $('#editActors').val("");
+}
+
 // Selects movie to edit and populates form input values with the movie data
 $('#movieEditSelector').change(() => {
     let selectedVal = $('#movieEditSelector').val();
-    console.log('This is selected value ' + selectedVal);
     if (selectedVal === 'default') {
-          $('#editTitle').val("");
-          $('#editRating').val("");
-          $('#editPoster').val("");
-          $('#editYear').val("");
-          $('#editGenre').val("");
-          $('#editDirector').val("");
-          $('#editPlot').val("");
-          $('#editActors').val("");
+          clearEditInput();
     }
 
     for (let movie of moviesArr) {
@@ -89,7 +73,6 @@ $('#movieEditSelector').change(() => {
 });
 
 $('#editMovieButton').click(function () {
-    console.log('You clicked Edit movie');
     let selectedVal = $('#movieEditSelector').val();
     let patchThis = {
         "title": $('#editTitle').val(),
@@ -109,8 +92,8 @@ $('#editMovieButton').click(function () {
         body: JSON.stringify(patchThis)
     };
     fetch(`https://auspicious-grizzled-unicorn.glitch.me/movies/${selectedVal}`, patchOption).then(getMovies);
-    console.log(selectedVal);
 
+    clearEditInput();
 });
 
 function fade_out() {
@@ -144,10 +127,43 @@ $("#addMovie").click((e) => {
     if (newMovieTitle === '' || newMovieRating === '') {
         return;
     }
-    console.log(newMovieTitle);
     newMovie.title = `${newMovieTitle}`;
     newMovie.rating = `${newMovieRating}`;
     postOption.body = JSON.stringify(newMovie);
     fetch(`https://auspicious-grizzled-unicorn.glitch.me/movies`, postOption)
         .then(getMovies);
 });
+
+$("#search").click((e) => {
+    e.preventDefault();
+    let searchVal = $("#searchInput").val();
+    let htmlStr = '';
+    let htmlStr1 = '';
+    for (let movie of moviesArr) {
+        if (movie.title.toLowerCase().includes(searchVal.toLowerCase())) {
+            htmlStr += movieHtml(movie);
+            htmlStr1 += selectHtml(movie);
+        }
+    }
+    $('#movieContainer').html(htmlStr);
+    $('#movieEditSelector').html(htmlStr1);
+    $('#movieEditSelector').prepend(`<option value="default" selected>Select a movie</option>`);
+});
+
+function movieHtml(movie) {
+    return `<div id="movies${movie.id}" class="card" style="width: 15em;">
+                <img class="card-img-top" src="${movie.poster}" alt="Movie Poster for ${movie.title}">
+                <div class="card-body">
+                    <h2 class="card-title hideThis hidden">${movie.title}</h2>
+                    <p class="card-text hidden hideThis text-muted movieDirector">By: ${movie.director}</p>
+                    <p class="card-text hideThis hidden">Release date: ${movie.year}</p>
+                    <p class="card-text hideThis hidden">Genre: ${movie.genre}</p>
+                    <p class="card-text hidden hideThis moviePlot">Plot: ${movie.plot}</p>
+                    <button type="button" class="btn btn-outline-light hidden hideThis" id="deleteMovie${movie.id}" onclick="deleteMovie(${movie.id})">Delete Movie</button>
+                </div>
+            </div>`;
+};
+
+function selectHtml(movie) {
+    return `<option value="${movie.id}">${movie.title}</option>`;
+};
