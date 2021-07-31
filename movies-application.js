@@ -1,6 +1,7 @@
 // $(document).ready(() => {}); *** When finished with project implement this ***
 
 let moviesArr = [];
+// Fetches the movies from the json db and adds them to the movies array and then displays all movies.
 const getMovies = () => {
     fetch('https://auspicious-grizzled-unicorn.glitch.me/movies')
         .then(resp => resp.json())
@@ -16,7 +17,7 @@ const getMovies = () => {
             $('#movieContainer').html(htmlStr);
             $('#movieEditSelector').html(htmlStr1);
             $('#movieEditSelector').prepend(`<option value="default" selected>Select a movie</option>`);
-        }).then(fade_out)
+        }).then(clearLoadScreen)
         .then(() => {
             for (let movie of moviesArr) {
                 $(`#movies${movie.id}`).click(function () {
@@ -28,7 +29,7 @@ const getMovies = () => {
 
 getMovies();
 
-
+// Deletes the movie from the json db and refreshes the html on page to reflect the change
 function deleteMovie(id) {
     let deleteOptions = {
         method: 'DELETE',
@@ -51,7 +52,7 @@ function clearEditInput() {
     $('#editActors').val("");
 }
 
-// Selects movie to edit and populates form input values with the movie data
+// Selects movie to edit and populates the edit form inputs with values from the movie's data
 $('#movieEditSelector').change(() => {
     let selectedVal = $('#movieEditSelector').val();
     if (selectedVal === 'default') {
@@ -72,6 +73,7 @@ $('#movieEditSelector').change(() => {
     }
 });
 
+// When edit is submitted it updates the input values to the movie's json db file
 $('#editMovieButton').click(function () {
     let selectedVal = $('#movieEditSelector').val();
     let patchThis = {
@@ -96,8 +98,9 @@ $('#editMovieButton').click(function () {
     clearEditInput();
 });
 
-function fade_out() {
-    $("#loading").fadeOut().empty();
+// Removes loading screen
+function clearLoadScreen() {
+    $("#loading").remove();
 }
 
 let newMovie = {
@@ -111,15 +114,8 @@ let newMovie = {
     "actors": ""
 };
 
-// working with POST
-let postOption = {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: ''
-};
 
+// Adds new movie to the json db
 $("#addMovie").click((e) => {
     e.preventDefault();
     let newMovieTitle = $('#addTitleInput').val();
@@ -129,27 +125,41 @@ $("#addMovie").click((e) => {
     }
     newMovie.title = `${newMovieTitle}`;
     newMovie.rating = `${newMovieRating}`;
+    let postOption = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: ''
+    };
     postOption.body = JSON.stringify(newMovie);
     fetch(`https://auspicious-grizzled-unicorn.glitch.me/movies`, postOption)
         .then(getMovies);
 });
 
+// Searches the movies arr for movie titles that are similar to the search term and displays those results.
 $("#search").click((e) => {
     e.preventDefault();
     let searchVal = $("#searchInput").val();
     let htmlStr = '';
     let htmlStr1 = '';
+    let noMatchFound = true;
     for (let movie of moviesArr) {
         if (movie.title.toLowerCase().includes(searchVal.toLowerCase())) {
+            noMatchFound = false;
             htmlStr += movieHtml(movie);
             htmlStr1 += selectHtml(movie);
         }
+    }
+    if(noMatchFound) {
+        htmlStr = "<h1>Sorry no results found for: " + searchVal + "</h1>";
     }
     $('#movieContainer').html(htmlStr);
     $('#movieEditSelector').html(htmlStr1);
     $('#movieEditSelector').prepend(`<option value="default" selected>Select a movie</option>`);
 });
 
+// Creates the html card for a movie object that is passed in.
 function movieHtml(movie) {
     return `<div id="movies${movie.id}" class="card" style="width: 15em;">
                 <img class="card-img-top" src="${movie.poster}" alt="Movie Poster for ${movie.title}">
@@ -164,6 +174,13 @@ function movieHtml(movie) {
             </div>`;
 };
 
+// Adds the movie object to the edit movie select dropdown.
 function selectHtml(movie) {
     return `<option value="${movie.id}">${movie.title}</option>`;
 };
+
+// Loads all movies when you click home
+$("#home").click((e) => {
+    e.preventDefault();
+    getMovies();
+})
