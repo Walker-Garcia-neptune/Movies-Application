@@ -61,3 +61,7 @@ img {
 .card-body {
     padding: 0 .5em 0 .5em;
 }
+
+nav{
+    width: 100%;
+}
